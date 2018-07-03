@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--缺少下面这个会报错-->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--从properties文件配置全局属性-->
+    <properties resource = "jdbc.properties"/>
+    <settings>
+        <!--mybatis二级缓存-->
+        <setting name="cacheEnabled" value="true" />
+        <!--使用jdbc的getGeneratedKeys 获取数据库自增主键 -->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--使用列别名替换列名 默认true
+            select name as title from table;
+        -->
+        <setting name="useColumnLabel" value="true"></setting>
+        <!--开启驼峰命名-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!--配置类型的别名
+    <typeAliases></typeAliases>-->
+    <!--一般情况下typeHandlers用系统自带就够了
+        对于枚举等情况需要自己设置typeHandler
+    <typeHandlers></typeHandlers>-->
+    <!--对象工厂，用于创建结果集时，生成结果集对象实例
+        可以自定义，但是一般情况下自定义工厂继承自DefaultObjectFactory
+    <objectFactory></objectFactory>-->
+    <!--配置插件
+    <plugins>
+        <plugin interceptor=""></plugin>
+    </plugins>-->
+    <environments default="development">
+        <environment id="development">
+            <!-- 使用jdbc事务管理(JdbcTransaction)，目前由mybatis来管理 -->
+            <!--Transaction提供了两个实现类，JdbcTransaction和ManagedTransaction，对应有
+                相应的工厂类来生成Transaction对象。
+                Jdbc事务管理器以JDBC方式处理提交和回滚；
+                Managed管理器不需要操作提交和回滚，而是交给容器处理。默认情况下，业务结束会关闭连接，可配置
+                也可以自定义一个工厂实现一个事务管理器，在type参数中填写全限定名-->
+            <transactionManager type="JDBC" />
+            <!-- 数据库连接池，目前由mybatis来管理 -->
+            <dataSource type="POOLED">
+                <!--pooled是指连接池。使用unpooled，则每次新建一个连接
+                    JNDI是用于在EJB或应用服务器这类容器中，容器可以集中或在外部配置数据源
+                    使用DataSourceFactory可以配置第三方数据源-->
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/mzdatabase" />
+                <property name="username" value="root" />
+                <property name="password" value="admin" />
+            </dataSource>
+        </environment>
+    </environments>
+    <!--数据库厂商名，例如从Mysql数据库移植到oracle数据库，但是mybatis移植性不如Hibernate
+    <databaseIdProvider type=""></databaseIdProvider>-->
+    <!--引入映射器mapper-->
+    <mappers>
+        <mapper resource="mapper/PlayersMapper.xml" />
+        <mapper resource="mapper/TransfersMapper.xml" />
+        <mapper resource="mapper/YouthMapper.xml" />
+        <!--还可以用包、类引入映射器-->
+
+    </mappers>
+
+</configuration>

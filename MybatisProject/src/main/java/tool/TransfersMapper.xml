@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tool.TransfersMapper">
+  <resultMap id="BaseResultMap" type="tool.Transfers">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="Pid" jdbcType="INTEGER" property="pid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="birthSeason" jdbcType="INTEGER" property="birthseason" />
+    <result column="VALUE" jdbcType="INTEGER" property="value" />
+    <result column="SALARY" jdbcType="INTEGER" property="salary" />
+    <result column="Nationality" jdbcType="VARCHAR" property="nationality" />
+    <result column="SPEED" jdbcType="INTEGER" property="speed" />
+    <result column="STAMINA" jdbcType="INTEGER" property="stamina" />
+    <result column="ITG" jdbcType="INTEGER" property="itg" />
+    <result column="PASS" jdbcType="INTEGER" property="pass" />
+    <result column="SHOOT" jdbcType="INTEGER" property="shoot" />
+    <result column="HEAD" jdbcType="INTEGER" property="head" />
+    <result column="KEEP" jdbcType="INTEGER" property="keep" />
+    <result column="CONTROL" jdbcType="INTEGER" property="control" />
+    <result column="TACKL" jdbcType="INTEGER" property="tackl" />
+    <result column="A_PASS" jdbcType="INTEGER" property="aPass" />
+    <result column="SET_PALYS" jdbcType="INTEGER" property="setPalys" />
+    <result column="EXPERIENCE" jdbcType="INTEGER" property="experience" />
+    <result column="ASKING_PRICE" jdbcType="INTEGER" property="askingPrice" />
+    <result column="LATEST_BID" jdbcType="INTEGER" property="latestBid" />
+    <result column="dl_date" jdbcType="DATE" property="dlDate" />
+    <result column="dl_time" jdbcType="TIME" property="dlTime" />
+    <result column="dl_Season_day" jdbcType="INTEGER" property="dlSeasonDay" />
+    <result column="keeper" jdbcType="BIT" property="keeper" />
+    <result column="guard" jdbcType="BIT" property="guard" />
+    <result column="DMF" jdbcType="BIT" property="dmf" />
+    <result column="midfielder" jdbcType="BIT" property="midfielder" />
+    <result column="forward" jdbcType="BIT" property="forward" />
+    <result column="winger" jdbcType="BIT" property="winger" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from transfers
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="tool.Transfers">
+    insert into transfers (id, Pid, name, 
+      birthSeason, VALUE, SALARY, 
+      Nationality, SPEED, STAMINA, 
+      ITG, PASS, SHOOT, HEAD, 
+      KEEP, CONTROL, TACKL, 
+      A_PASS, SET_PALYS, EXPERIENCE, 
+      ASKING_PRICE, LATEST_BID, dl_date, 
+      dl_time, dl_Season_day, keeper, 
+      guard, DMF, midfielder, forward, 
+      winger)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{birthseason,jdbcType=INTEGER}, #{value,jdbcType=INTEGER}, #{salary,jdbcType=INTEGER}, 
+      #{nationality,jdbcType=VARCHAR}, #{speed,jdbcType=INTEGER}, #{stamina,jdbcType=INTEGER}, 
+      #{itg,jdbcType=INTEGER}, #{pass,jdbcType=INTEGER}, #{shoot,jdbcType=INTEGER}, #{head,jdbcType=INTEGER}, 
+      #{keep,jdbcType=INTEGER}, #{control,jdbcType=INTEGER}, #{tackl,jdbcType=INTEGER}, 
+      #{aPass,jdbcType=INTEGER}, #{setPalys,jdbcType=INTEGER}, #{experience,jdbcType=INTEGER}, 
+      #{askingPrice,jdbcType=INTEGER}, #{latestBid,jdbcType=INTEGER}, #{dlDate,jdbcType=DATE}, 
+      #{dlTime,jdbcType=TIME}, #{dlSeasonDay,jdbcType=INTEGER}, #{keeper,jdbcType=BIT}, 
+      #{guard,jdbcType=BIT}, #{dmf,jdbcType=BIT}, #{midfielder,jdbcType=BIT}, #{forward,jdbcType=BIT}, 
+      #{winger,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="tool.Transfers">
+    update transfers
+    set Pid = #{pid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      birthSeason = #{birthseason,jdbcType=INTEGER},
+      VALUE = #{value,jdbcType=INTEGER},
+      SALARY = #{salary,jdbcType=INTEGER},
+      Nationality = #{nationality,jdbcType=VARCHAR},
+      SPEED = #{speed,jdbcType=INTEGER},
+      STAMINA = #{stamina,jdbcType=INTEGER},
+      ITG = #{itg,jdbcType=INTEGER},
+      PASS = #{pass,jdbcType=INTEGER},
+      SHOOT = #{shoot,jdbcType=INTEGER},
+      HEAD = #{head,jdbcType=INTEGER},
+      KEEP = #{keep,jdbcType=INTEGER},
+      CONTROL = #{control,jdbcType=INTEGER},
+      TACKL = #{tackl,jdbcType=INTEGER},
+      A_PASS = #{aPass,jdbcType=INTEGER},
+      SET_PALYS = #{setPalys,jdbcType=INTEGER},
+      EXPERIENCE = #{experience,jdbcType=INTEGER},
+      ASKING_PRICE = #{askingPrice,jdbcType=INTEGER},
+      LATEST_BID = #{latestBid,jdbcType=INTEGER},
+      dl_date = #{dlDate,jdbcType=DATE},
+      dl_time = #{dlTime,jdbcType=TIME},
+      dl_Season_day = #{dlSeasonDay,jdbcType=INTEGER},
+      keeper = #{keeper,jdbcType=BIT},
+      guard = #{guard,jdbcType=BIT},
+      DMF = #{dmf,jdbcType=BIT},
+      midfielder = #{midfielder,jdbcType=BIT},
+      forward = #{forward,jdbcType=BIT},
+      winger = #{winger,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, Pid, name, birthSeason, VALUE, SALARY, Nationality, SPEED, STAMINA, ITG, 
+    PASS, SHOOT, HEAD, KEEP, CONTROL, TACKL, A_PASS, SET_PALYS, EXPERIENCE, ASKING_PRICE, 
+    LATEST_BID, dl_date, dl_time, dl_Season_day, keeper, guard, DMF, midfielder, forward, 
+    winger
+    from transfers
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, Pid, name, birthSeason, VALUE, SALARY, Nationality, SPEED, STAMINA, ITG, 
+    PASS, SHOOT, HEAD, KEEP, CONTROL, TACKL, A_PASS, SET_PALYS, EXPERIENCE, ASKING_PRICE, 
+    LATEST_BID, dl_date, dl_time, dl_Season_day, keeper, guard, DMF, midfielder, forward, 
+    winger
+    from transfers
+  </select>
+  <resultMap id="BaseResultMap" type="tool.Transfers">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="Pid" jdbcType="INTEGER" property="pid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="birthSeason" jdbcType="INTEGER" property="birthseason" />
+    <result column="VALUE" jdbcType="INTEGER" property="value" />
+    <result column="SALARY" jdbcType="INTEGER" property="salary" />
+    <result column="Nationality" jdbcType="VARCHAR" property="nationality" />
+    <result column="SPEED" jdbcType="INTEGER" property="speed" />
+    <result column="STAMINA" jdbcType="INTEGER" property="stamina" />
+    <result column="ITG" jdbcType="INTEGER" property="itg" />
+    <result column="PASS" jdbcType="INTEGER" property="pass" />
+    <result column="SHOOT" jdbcType="INTEGER" property="shoot" />
+    <result column="HEAD" jdbcType="INTEGER" property="head" />
+    <result column="KEEP" jdbcType="INTEGER" property="keep" />
+    <result column="CONTROL" jdbcType="INTEGER" property="control" />
+    <result column="TACKL" jdbcType="INTEGER" property="tackl" />
+    <result column="A_PASS" jdbcType="INTEGER" property="aPass" />
+    <result column="SET_PALYS" jdbcType="INTEGER" property="setPalys" />
+    <result column="EXPERIENCE" jdbcType="INTEGER" property="experience" />
+    <result column="ASKING_PRICE" jdbcType="INTEGER" property="askingPrice" />
+    <result column="LATEST_BID" jdbcType="INTEGER" property="latestBid" />
+    <result column="dl_date" jdbcType="DATE" property="dlDate" />
+    <result column="dl_time" jdbcType="TIME" property="dlTime" />
+    <result column="dl_Season_day" jdbcType="INTEGER" property="dlSeasonDay" />
+    <result column="keeper" jdbcType="BIT" property="keeper" />
+    <result column="guard" jdbcType="BIT" property="guard" />
+    <result column="DMF" jdbcType="BIT" property="dmf" />
+    <result column="midfielder" jdbcType="BIT" property="midfielder" />
+    <result column="forward" jdbcType="BIT" property="forward" />
+    <result column="winger" jdbcType="BIT" property="winger" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from transfers
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="tool.Transfers">
+    insert into transfers (id, Pid, name, 
+      birthSeason, VALUE, SALARY, 
+      Nationality, SPEED, STAMINA, 
+      ITG, PASS, SHOOT, HEAD, 
+      KEEP, CONTROL, TACKL, 
+      A_PASS, SET_PALYS, EXPERIENCE, 
+      ASKING_PRICE, LATEST_BID, dl_date, 
+      dl_time, dl_Season_day, keeper, 
+      guard, DMF, midfielder, forward, 
+      winger)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{birthseason,jdbcType=INTEGER}, #{value,jdbcType=INTEGER}, #{salary,jdbcType=INTEGER}, 
+      #{nationality,jdbcType=VARCHAR}, #{speed,jdbcType=INTEGER}, #{stamina,jdbcType=INTEGER}, 
+      #{itg,jdbcType=INTEGER}, #{pass,jdbcType=INTEGER}, #{shoot,jdbcType=INTEGER}, #{head,jdbcType=INTEGER}, 
+      #{keep,jdbcType=INTEGER}, #{control,jdbcType=INTEGER}, #{tackl,jdbcType=INTEGER}, 
+      #{aPass,jdbcType=INTEGER}, #{setPalys,jdbcType=INTEGER}, #{experience,jdbcType=INTEGER}, 
+      #{askingPrice,jdbcType=INTEGER}, #{latestBid,jdbcType=INTEGER}, #{dlDate,jdbcType=DATE}, 
+      #{dlTime,jdbcType=TIME}, #{dlSeasonDay,jdbcType=INTEGER}, #{keeper,jdbcType=BIT}, 
+      #{guard,jdbcType=BIT}, #{dmf,jdbcType=BIT}, #{midfielder,jdbcType=BIT}, #{forward,jdbcType=BIT}, 
+      #{winger,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="tool.Transfers">
+    update transfers
+    set Pid = #{pid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      birthSeason = #{birthseason,jdbcType=INTEGER},
+      VALUE = #{value,jdbcType=INTEGER},
+      SALARY = #{salary,jdbcType=INTEGER},
+      Nationality = #{nationality,jdbcType=VARCHAR},
+      SPEED = #{speed,jdbcType=INTEGER},
+      STAMINA = #{stamina,jdbcType=INTEGER},
+      ITG = #{itg,jdbcType=INTEGER},
+      PASS = #{pass,jdbcType=INTEGER},
+      SHOOT = #{shoot,jdbcType=INTEGER},
+      HEAD = #{head,jdbcType=INTEGER},
+      KEEP = #{keep,jdbcType=INTEGER},
+      CONTROL = #{control,jdbcType=INTEGER},
+      TACKL = #{tackl,jdbcType=INTEGER},
+      A_PASS = #{aPass,jdbcType=INTEGER},
+      SET_PALYS = #{setPalys,jdbcType=INTEGER},
+      EXPERIENCE = #{experience,jdbcType=INTEGER},
+      ASKING_PRICE = #{askingPrice,jdbcType=INTEGER},
+      LATEST_BID = #{latestBid,jdbcType=INTEGER},
+      dl_date = #{dlDate,jdbcType=DATE},
+      dl_time = #{dlTime,jdbcType=TIME},
+      dl_Season_day = #{dlSeasonDay,jdbcType=INTEGER},
+      keeper = #{keeper,jdbcType=BIT},
+      guard = #{guard,jdbcType=BIT},
+      DMF = #{dmf,jdbcType=BIT},
+      midfielder = #{midfielder,jdbcType=BIT},
+      forward = #{forward,jdbcType=BIT},
+      winger = #{winger,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, Pid, name, birthSeason, VALUE, SALARY, Nationality, SPEED, STAMINA, ITG, 
+    PASS, SHOOT, HEAD, KEEP, CONTROL, TACKL, A_PASS, SET_PALYS, EXPERIENCE, ASKING_PRICE, 
+    LATEST_BID, dl_date, dl_time, dl_Season_day, keeper, guard, DMF, midfielder, forward, 
+    winger
+    from transfers
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, Pid, name, birthSeason, VALUE, SALARY, Nationality, SPEED, STAMINA, ITG, 
+    PASS, SHOOT, HEAD, KEEP, CONTROL, TACKL, A_PASS, SET_PALYS, EXPERIENCE, ASKING_PRICE, 
+    LATEST_BID, dl_date, dl_time, dl_Season_day, keeper, guard, DMF, midfielder, forward, 
+    winger
+    from transfers
+  </select>
+</mapper>
