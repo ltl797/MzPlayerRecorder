@@ -28,9 +28,7 @@
     delete from players
     where id = #{id,jdbcType=INTEGER}
   </delete>
-
-  <insert id="insert" parameterType="model.Players"
-          useGeneratedKeys="true" keyProperty="id"><!--这一行的配置是指，返回插入项的主键-->
+  <insert id="insert" parameterType="model.Players">
     insert into players (id, Pid, name, 
       birthSeason, VALUE, SALARY, 
       Nationality, SPEED, STAMINA, 
@@ -88,32 +86,7 @@
 
   <update id="updateByPlayerId" parameterType="model.Players">
     update players
-    set <include refid="allValue"/>
-  </update>
-  <select id="selectByPlayerId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select *
-    from players
-    where Pid = #{playerId,jdbcType=INTEGER}
-  </select>
-  <select id="selectByModel" parameterType="model.Players" resultMap="BaseResultMap">
-    select *
-    from players
-    where birthSeason > #{birthseason,jdbcType=INTEGER}
-    and SPEED > #{speed,jdbcType=INTEGER}
-  </select>
-  <!--使用@Prama传入参数不需要设置parameterType属性-->
-  <select id="selectSpeedStaminaShootControl" resultMap="BaseResultMap">
-    select *
-    from players
-    where SHOOT >= #{shoot,jdbcType=INTEGER}
-    and SPEED >= #{speed,jdbcType=INTEGER}
-    and STAMINA >= #{stamina,jdbcType=INTEGER}
-    and CONTROL >= #{control,jdbcType=INTEGER}
-  </select>
-
-  <!--定义一个sql元素，可以在语句中重复使用-->
-  <sql id="allValue">
-    Pid = #{pid,jdbcType=INTEGER},
+    set Pid = #{pid,jdbcType=INTEGER},
     name = #{name,jdbcType=VARCHAR},
     birthSeason = #{birthseason,jdbcType=INTEGER},
     VALUE = #{value,jdbcType=INTEGER},
@@ -134,5 +107,13 @@
     jointeam = #{jointeam,jdbcType=DATE},
     leaveteam = #{leaveteam,jdbcType=DATE},
     had_cost = #{hadCost,jdbcType=INTEGER}
-  </sql>
+    where Pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPlayerId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, Pid, name, birthSeason, VALUE, SALARY, Nationality, SPEED, STAMINA, ITG,
+    PASS, SHOOT, HEAD, KEEP, CONTROL, TACKL, A_PASS, SET_PALYS, EXPERIENCE, jointeam,
+    leaveteam, had_cost
+    from players
+    where Pid = #{playerId,jdbcType=INTEGER}
+  </select>
 </mapper>

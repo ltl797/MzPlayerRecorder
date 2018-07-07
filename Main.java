@@ -32,7 +32,6 @@ public class Main {
         init();
 //        Mz frame = new Mz();
 //        frame.showPanel();
-
 //        addPlayers();
         addTransfers();
 //        addYouth();
@@ -54,7 +53,7 @@ public class Main {
 
     private static void init() throws IOException {
         InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);//创建完就应该释放
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);//创建完就应该释放，从这里开始配置mybatis
         sqlSession = sqlSessionFactory.openSession();//每次请求申请一个session
         playersMapper = sqlSession.getMapper(PlayersMapper.class);//每次业务处理使用一个mapper，用完释放
         transfersMapper = sqlSession.getMapper(TransfersMapper.class);
@@ -140,12 +139,14 @@ public class Main {
                 String lineTxt = null;
                 Transfers player = null;
                 while ((lineTxt = br.readLine()) != null) {
-                    if(lineTxt.contains("id")){
+                    if(lineTxt.contains("(转会市场)")){
                         //System.out.println(player);
                         if(player != null)
                             insertTransfer(player);
 //                            transfersMapper.insert(player);
-                        String[] tmp = lineTxt.split("id:");
+                        int pointIndex = lineTxt.indexOf('.');
+                        lineTxt = lineTxt.substring(pointIndex+1);
+                        String[] tmp = lineTxt.split("\\(转会市场\\) id:");
                         player = new Transfers();
                         player.setName(tmp[0].split(" ")[1].trim());
                         player.setPid(Integer.parseInt(tmp[1].trim()));
@@ -276,15 +277,20 @@ public class Main {
     public static double saleTax(Transfers tIn, Transfers tOut){
         Date out = tOut.getDlDate();
         Date in = tIn.getDlDate();
-        int days = (int)((out.getTime() - in.getTime())/86400000);
-        if(days < 3)
-            return 2;
-        else if(days<=28)
-            return 0.95;
-        else if(days<=70)
-            return 0.5;
-        else
-            return 0.15;
+        try {
+            int days = (int)((out.getTime() - in.getTime())/86400000);
+            if(days < 3)
+                return 2;
+            else if(days<=28)
+                return 0.95;
+            else if(days<=70)
+                return 0.5;
+            else
+                return 0.15;
+        } catch (Exception e) {
+            System.out.println(tIn.getName()+" "+tIn.getPid()+"缺少日期数据");
+            return 0;
+        }
     }
     public static double saleTax(Youth youth){
         SeasonDay sd=new SeasonDay(new Date());
